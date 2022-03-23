@@ -125,10 +125,10 @@ void send_CAN(struct_CAN_Message Msg)
     /*Writing the data register*/
     //can be used directly instead of assigning them to a register
 
-    C1TX0B1 = Msg.CAN_Word1;
-    C1TX0B2 = Msg.CAN_Word2;
-    C1TX0B3 = Msg.CAN_Word3;
-    C1TX0B4 = Msg.CAN_Word4;
+   // C1TX0B1 = Msg.CAN_Word1;
+  //  C1TX0B2 = Msg.CAN_Word2;
+  //  C1TX0B3 = Msg.CAN_Word3;
+  //  C1TX0B4 = Msg.CAN_Word4;
 
 
     //!!!! new changes for data-register STM32 format
@@ -156,7 +156,14 @@ void send_CAN(struct_CAN_Message Msg)
     TxHeader.RTR = CAN_RTR_DATA; // set to allow for remote transmission requests | it is set for data frame
     TxHeader.StdId = Msg.CAN_ID; //set the standard identifier to 256 (Field Nodes cannot access anything higher than 255 for their addresses)
 
-    TxData[8]= Msg.CAN_Word1;
+    TxData[0] = Msg.CAN_Word1;
+    TxData[1] = Msg.CAN_Word2;
+    TxData[2] = Msg.CAN_Word3;
+    TxData[3] = Msg.CAN_Word4;
+    TxData[4] = Msg.CAN_Word5;
+    TxData[5] = Msg.CAN_Word6;
+    TxData[6] = Msg.CAN_Word7;
+    TxData[7] = Msg.CAN_Word8;
 
     HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
 
@@ -190,11 +197,11 @@ void setFilter()
 
 /*adds the data of incoming messages to the buffer array (uint can1_fifo_msg_array)*/
 void can_fifo_add_msg(struct_CAN_Message msg){
-   // add_FIFO_CAN(&CAN_Receive_FIFO, msg);
+    add_FIFO_CAN(&CAN_Receive_FIFO, msg);
 }
 
 /*returns the latest data and message ID of incoming messages of the buffer array (uint can1_fifo_msg_array)*/
 struct_CAN_Message can_fifo_read_msg(){
-  //  read_FIFO_CAN(&CAN_Receive_FIFO);
-  //  return CAN_Receive_FIFO.act_Value;
+    read_FIFO_CAN(&CAN_Receive_FIFO);
+    return CAN_Receive_FIFO.act_Value;
 }

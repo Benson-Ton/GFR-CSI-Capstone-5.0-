@@ -19,6 +19,10 @@ typedef struct
     uint8_t CAN_Word2;
     uint8_t CAN_Word3;
     uint8_t CAN_Word4;
+    uint8_t CAN_Word5;
+    uint8_t CAN_Word6;
+    uint8_t CAN_Word7;
+    uint8_t CAN_Word8;
 }struct_CAN_Message;
 
 //CAN_FilterTypeDef canfilterconfig;

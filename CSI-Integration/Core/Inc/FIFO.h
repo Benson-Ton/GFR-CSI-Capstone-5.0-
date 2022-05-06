@@ -9,17 +9,17 @@
 
 typedef struct
 {
-    uint8 read_counter;
-    uint8 write_counter;
-    uint8 FIFO_Array[FIFO_SIZE];
-    uint8 act_Value;
+    uint8_t read_counter;
+    uint8_t write_counter;
+    uint8_t FIFO_Array[FIFO_SIZE];
+    uint8_t act_Value;
 
 }struct_FIFO;
 
 typedef struct
 {
-    uint8 read_counter;
-    uint8 write_counter;
+	uint8_t read_counter;
+	uint8_t write_counter;
     struct_CAN_Message FIFO_Array[CAN_FIFOSIZE];
     struct_CAN_Message act_Value;
 }struct_CAN_FIFO;
